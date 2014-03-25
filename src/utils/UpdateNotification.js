@@ -33,6 +33,7 @@ define(function (require, exports, module) {
     
     var Dialogs              = require("widgets/Dialogs"),
         DefaultDialogs       = require("widgets/DefaultDialogs"),
+        ExtensionManager     = require("extensibility/ExtensionManager"),
         PreferencesManager   = require("preferences/PreferencesManager"),
         Global               = require("utils/Global"),
         NativeApp            = require("utils/NativeApp"),
@@ -41,16 +42,24 @@ define(function (require, exports, module) {
         UpdateDialogTemplate = require("text!htmlContent/update-dialog.html"),
         UpdateListTemplate   = require("text!htmlContent/update-list.html");
     
+    var ONE_DAY = 1000 * 60 * 60 * 24;
+
     // Extract current build number from package.json version field 0.0.0-0
     var _buildNumber = Number(/-([0-9]+)/.exec(brackets.metadata.version)[1]);
     
     // Init default last build number
     PreferencesManager.stateManager.definePreference("lastNotifiedBuildNumber", "number", 0);
+    // Time of last registry check for update
+    PreferencesManager.stateManager.definePreference("lastExtensionRegistryCheckTime", "number", 0);
+    // Data about available updates in the registry
+    PreferencesManager.stateManager.definePreference("extensionUpdateInfo", "array", []);
 
     PreferencesManager.convertPreferences(module, {
         "lastNotifiedBuildNumber": "user",
         "lastInfoURLFetchTime": "user",
-        "updateInfo": "user"
+        "updateInfo": "user",
+        "lastExtensionRegistryCheckTime": "user",
+        "extensionUpdateInfo": "user"
     }, true);
     
     // This is the last version we notified the user about. If checkForUpdate()
@@ -115,7 +124,7 @@ define(function (require, exports, module) {
         }
         
         // If more than 24 hours have passed since our last fetch, fetch again
-        if ((new Date()).getTime() > _lastInfoURLFetchTime + (1000 * 60 * 60 * 24)) {
+        if ((new Date()).getTime() > _lastInfoURLFetchTime + ONE_DAY) {
             fetchData = true;
         }
         
@@ -211,6 +220,46 @@ define(function (require, exports, module) {
         $updateList.html(Mustache.render(UpdateListTemplate, updates));
     }
     
+    function _onRegistryDownloaded() {
+        var availableUpdates = ExtensionManager.getAvailableUpdates();
+        PreferencesManager.setViewState("extensionUpdateInfo", availableUpdates);
+        PreferencesManager.setViewState("lastExtensionRegistryCheckTime", (new Date()).getTime());
+        $("#toolbar-extension-manager").toggleClass("updatesAvailable", availableUpdates.length > 0);
+    }
+    $(ExtensionManager).on("registryDownload", _onRegistryDownloaded);
+
+    function checkForExtensionsUpdate() {
+        var lastExtensionRegistryCheckTime = PreferencesManager.getViewState("lastExtensionRegistryCheckTime"),
+            timeOfNextCheck = lastExtensionRegistryCheckTime + ONE_DAY,
+            currentTime = (new Date()).getTime();
+
+        // update icon according to previously saved information
+        var availableUpdates = PreferencesManager.getViewState("extensionUpdateInfo");
+        availableUpdates = ExtensionManager.cleanAvailableUpdates(availableUpdates);
+        $("#toolbar-extension-manager").toggleClass("updatesAvailable", availableUpdates.length > 0);
+
+        if (availableUpdates.length === 0) {
+            // icon is gray, no updates available
+            if (currentTime > timeOfNextCheck) {
+                // downloadRegistry, will be resolved in _onRegistryDownloaded
+                ExtensionManager.downloadRegistry().done(function () {
+                    // schedule another check in 24 hours + 2 minutes
+                    setTimeout(checkForExtensionsUpdate, ONE_DAY + (2 * 60 * 1000));
+                });
+            } else {
+                // schedule the download of the registry in appropriate time
+                setTimeout(checkForExtensionsUpdate, (timeOfNextCheck - currentTime) + (2 * 60 * 1000));
+            }
+        }
+    }
+
+    function launchAutomaticUpdate() {
+        // launch immediately and then every 24 hours + 2 minutes
+        checkForUpdate();
+        checkForExtensionsUpdate();
+        window.setInterval(checkForUpdate, ONE_DAY + (2 * 60 * 1000));
+    }
+
     /**
      * Check for updates. If "force" is true, update notification dialogs are always displayed
      * (if an update is available). If "force" is false, the update notification is only
@@ -332,5 +381,6 @@ define(function (require, exports, module) {
     _versionInfoURL = brackets.config.update_info_url + brackets.getLocale() + ".json";
 
     // Define public API
-    exports.checkForUpdate = checkForUpdate;
+    exports.launchAutomaticUpdate = launchAutomaticUpdate;
+    exports.checkForUpdate        = checkForUpdate;
 });
