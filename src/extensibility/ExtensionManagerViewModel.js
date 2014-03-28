@@ -366,6 +366,12 @@ define(function (require, exports, module) {
      */
     function InstalledViewModel() {
         ExtensionManagerViewModel.call(this);
+
+        var self = this;
+        $(ExtensionManager).on("registryDownload", function () {
+            self._sortFullSet();
+            self._setInitialFilter();
+        });
     }
     
     InstalledViewModel.prototype = Object.create(ExtensionManagerViewModel.prototype);
@@ -405,10 +411,19 @@ define(function (require, exports, module) {
         var self = this;
         
         this.sortedFullSet = this.sortedFullSet.sort(function (key1, key2) {
+            var ua1 = self.extensions[key1].installInfo.updateAvailable,
+                ua2 = self.extensions[key2].installInfo.updateAvailable;
+            if (ua1 && !ua2) {
+                return -1;
+            } else if (!ua1 && ua2) {
+                return 1;
+            }
+
             var metadata1 = self.extensions[key1].installInfo.metadata,
                 metadata2 = self.extensions[key2].installInfo.metadata,
                 id1 = (metadata1.title || metadata1.name).toLowerCase(),
                 id2 = (metadata2.title || metadata2.name).toLowerCase();
+
             if (id1 < id2) {
                 return -1;
             } else if (id1 === id2) {
