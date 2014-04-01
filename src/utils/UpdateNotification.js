@@ -57,9 +57,7 @@ define(function (require, exports, module) {
     PreferencesManager.convertPreferences(module, {
         "lastNotifiedBuildNumber": "user",
         "lastInfoURLFetchTime": "user",
-        "updateInfo": "user",
-        "lastExtensionRegistryCheckTime": "user",
-        "extensionUpdateInfo": "user"
+        "updateInfo": "user"
     }, true);
     
     // This is the last version we notified the user about. If checkForUpdate()
