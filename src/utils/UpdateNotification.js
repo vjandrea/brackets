@@ -224,7 +224,6 @@ define(function (require, exports, module) {
         PreferencesManager.setViewState("lastExtensionRegistryCheckTime", (new Date()).getTime());
         $("#toolbar-extension-manager").toggleClass("updatesAvailable", availableUpdates.length > 0);
     }
-    $(ExtensionManager).on("registryDownload", _onRegistryDownloaded);
 
     function checkForExtensionsUpdate() {
         var lastExtensionRegistryCheckTime = PreferencesManager.getViewState("lastExtensionRegistryCheckTime"),
@@ -377,6 +376,9 @@ define(function (require, exports, module) {
     
     // Append locale to version info URL
     _versionInfoURL = brackets.config.update_info_url + brackets.getLocale() + ".json";
+
+    // Events listeners
+    $(ExtensionManager).on("registryDownload", _onRegistryDownloaded);
 
     // Define public API
     exports.launchAutomaticUpdate = launchAutomaticUpdate;
