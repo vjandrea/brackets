@@ -250,13 +250,6 @@ define(function (require, exports, module) {
         }
     }
 
-    function launchAutomaticUpdate() {
-        // launch immediately and then every 24 hours + 2 minutes
-        checkForUpdate();
-        checkForExtensionsUpdate();
-        window.setInterval(checkForUpdate, ONE_DAY + (2 * 60 * 1000));
-    }
-
     /**
      * Check for updates. If "force" is true, update notification dialogs are always displayed
      * (if an update is available). If "force" is false, the update notification is only
@@ -374,6 +367,13 @@ define(function (require, exports, module) {
         return result.promise();
     }
     
+    function launchAutomaticUpdate() {
+        // launch immediately and then every 24 hours + 2 minutes
+        checkForUpdate();
+        checkForExtensionsUpdate();
+        window.setInterval(checkForUpdate, ONE_DAY + (2 * 60 * 1000));
+    }
+
     // Append locale to version info URL
     _versionInfoURL = brackets.config.update_info_url + brackets.getLocale() + ".json";
 
