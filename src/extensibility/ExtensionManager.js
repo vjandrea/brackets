@@ -108,25 +108,25 @@ define(function (require, exports, module) {
         entry.installInfo.owner = entry.registryInfo.owner;
 
         // Assume false
-        entry.installInfo.updateAvailable = false;
-        entry.registryInfo.updateAvailable = false;
-        entry.installInfo.updateCompatible = false;
+        entry.installInfo.updateAvailable   = false;
+        entry.registryInfo.updateAvailable  = false;
+        entry.installInfo.updateCompatible  = false;
         entry.registryInfo.updateCompatible = false;
 
         var currentVersion = entry.installInfo.metadata ? entry.installInfo.metadata.version : null;
         if (currentVersion && semver.lt(currentVersion, entry.registryInfo.metadata.version)) {
             // Note: available update may still be incompatible; we check for this when rendering the Update button in ExtensionManagerView._renderItem()
-            entry.registryInfo.updateAvailable = true;
-            entry.installInfo.updateAvailable = true;
+            entry.registryInfo.updateAvailable  = true;
+            entry.installInfo.updateAvailable   = true;
             // Calculate updateCompatible to check if there's an update for current version of Brackets
             var lastCompatibleVersionInfo = _.findLast(entry.registryInfo.versions, function (versionInfo) {
                 return semver.satisfies(brackets.metadata.apiVersion, versionInfo.brackets);
             });
             if (lastCompatibleVersionInfo && lastCompatibleVersionInfo.version && semver.lt(currentVersion, lastCompatibleVersionInfo.version)) {
-                entry.installInfo.updateCompatible = true;
-                entry.registryInfo.updateCompatible = true;
-                entry.registryInfo.lastCompatibleVersion = lastCompatibleVersionInfo.version;
-                entry.registryInfo.lastCompatibleVersion = lastCompatibleVersionInfo.version;
+                entry.installInfo.updateCompatible        = true;
+                entry.registryInfo.updateCompatible       = true;
+                entry.installInfo.lastCompatibleVersion   = lastCompatibleVersionInfo.version;
+                entry.registryInfo.lastCompatibleVersion  = lastCompatibleVersionInfo.version;
             }
         }
 
@@ -523,6 +523,13 @@ define(function (require, exports, module) {
         );
     }
     
+    /**
+     * Gets an array of extensions that are currently installed and can be updated to a new version
+     * @return {Array} array of objects with properies id,installVersion,registryVersion
+     *                 where id = extensionId
+     *                       installVersion = currently installed version of extension
+     *                       registryVersion = latest version compatible with current Brackets
+     */
     function getAvailableUpdates() {
         var result = [];
         Object.keys(extensions).forEach(function (extensionId) {
@@ -542,6 +549,14 @@ define(function (require, exports, module) {
         return result;
     }
 
+    /**
+     * Takes array returned from getAvailableUpdates() as an input and removes those entries
+     * that are no longer current - when currently installed version of an extension
+     * is equal or newer than registryVersion returned by getAvailableUpdates().
+     * This function is designed to work without the necessity to download extension registry
+     * @param {Array} previous output of getAvailableUpdates()
+     * @param {Array} filtered input as function description
+     */
     function cleanAvailableUpdates(updates) {
         return updates.reduce(function (arr, updateInfo) {
             var extDefinition = extensions[updateInfo.id];

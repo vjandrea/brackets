@@ -367,6 +367,7 @@ define(function (require, exports, module) {
     function InstalledViewModel() {
         ExtensionManagerViewModel.call(this);
 
+        // when registry is downloaded, sort extensions again - those with updates will be before others
         var self = this;
         $(ExtensionManager).on("registryDownload", function () {
             self._sortFullSet();
@@ -411,6 +412,7 @@ define(function (require, exports, module) {
         var self = this;
         
         this.sortedFullSet = this.sortedFullSet.sort(function (key1, key2) {
+            // before sorting by name, put first extensions that have updates
             var ua1 = self.extensions[key1].installInfo.updateAvailable,
                 ua2 = self.extensions[key2].installInfo.updateAvailable;
 

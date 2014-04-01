@@ -218,6 +218,9 @@ define(function (require, exports, module) {
         $updateList.html(Mustache.render(UpdateListTemplate, updates));
     }
     
+    /**
+     * Calculate state of notification everytime registries are downloaded - no matter who triggered the download
+     */
     function _onRegistryDownloaded() {
         var availableUpdates = ExtensionManager.getAvailableUpdates();
         PreferencesManager.setViewState("extensionUpdateInfo", availableUpdates);
@@ -225,6 +228,12 @@ define(function (require, exports, module) {
         $("#toolbar-extension-manager").toggleClass("updatesAvailable", availableUpdates.length > 0);
     }
 
+    /**
+     *  Every 24 hours downloads registry information to check for update, but only if the registry download
+     *  wasn't triggered by another action (like opening extension manager)
+     *  If there isn't 24 hours elapsed from the last download, use cached information from last download
+     *  to determine state of the update notification.
+     */
     function checkForExtensionsUpdate() {
         var lastExtensionRegistryCheckTime = PreferencesManager.getViewState("lastExtensionRegistryCheckTime"),
             timeOfNextCheck = lastExtensionRegistryCheckTime + ONE_DAY,
@@ -367,6 +376,9 @@ define(function (require, exports, module) {
         return result.promise();
     }
     
+    /**
+     * Launches both check for Brackets update and check for installed extensions update
+     */
     function launchAutomaticUpdate() {
         // launch immediately and then every 24 hours + 2 minutes
         checkForUpdate();
