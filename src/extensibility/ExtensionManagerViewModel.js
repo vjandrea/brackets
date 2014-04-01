@@ -425,13 +425,7 @@ define(function (require, exports, module) {
                 id1 = (metadata1.title || metadata1.name).toLowerCase(),
                 id2 = (metadata2.title || metadata2.name).toLowerCase();
 
-            if (id1 < id2) {
-                return -1;
-            } else if (id1 === id2) {
-                return 0;
-            } else {
-                return 1;
-            }
+            return id1.localeCompare(id2);
         });
     };
     
