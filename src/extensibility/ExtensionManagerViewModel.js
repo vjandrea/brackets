@@ -437,7 +437,7 @@ define(function (require, exports, module) {
         var self = this;
         this.notifyCount = 0;
         this.sortedFullSet.forEach(function (key) {
-            if (self.extensions[key].installInfo.updateAvailable) {
+            if (self.extensions[key].installInfo.updateCompatible) {
                 self.notifyCount++;
             }
         });
