@@ -565,35 +565,35 @@ define(function (require, exports, module) {
         .on("loadFailed", _handleExtensionLoad);
 
     // Public exports
-    exports.downloadRegistry = downloadRegistry;
-    exports.getCompatibilityInfo = getCompatibilityInfo;
-    exports.getExtensionURL = getExtensionURL;
-    exports.remove = remove;
-    exports.update = update;
-    exports.extensions = extensions;
-    exports.cleanupUpdates = cleanupUpdates;
-    exports.markForRemoval = markForRemoval;
-    exports.isMarkedForRemoval = isMarkedForRemoval;
-    exports.unmarkAllForRemoval = unmarkAllForRemoval;
-    exports.hasExtensionsToRemove = hasExtensionsToRemove;
-    exports.updateFromDownload = updateFromDownload;
-    exports.removeUpdate = removeUpdate;
-    exports.isMarkedForUpdate = isMarkedForUpdate;
-    exports.hasExtensionsToUpdate = hasExtensionsToUpdate;
-    exports.removeMarkedExtensions = removeMarkedExtensions;
-    exports.updateExtensions = updateExtensions;
-    exports.getAvailableUpdates = getAvailableUpdates;
-    exports.cleanAvailableUpdates = cleanAvailableUpdates;
+    exports.downloadRegistry        = downloadRegistry;
+    exports.getCompatibilityInfo    = getCompatibilityInfo;
+    exports.getExtensionURL         = getExtensionURL;
+    exports.remove                  = remove;
+    exports.update                  = update;
+    exports.extensions              = extensions;
+    exports.cleanupUpdates          = cleanupUpdates;
+    exports.markForRemoval          = markForRemoval;
+    exports.isMarkedForRemoval      = isMarkedForRemoval;
+    exports.unmarkAllForRemoval     = unmarkAllForRemoval;
+    exports.hasExtensionsToRemove   = hasExtensionsToRemove;
+    exports.updateFromDownload      = updateFromDownload;
+    exports.removeUpdate            = removeUpdate;
+    exports.isMarkedForUpdate       = isMarkedForUpdate;
+    exports.hasExtensionsToUpdate   = hasExtensionsToUpdate;
+    exports.removeMarkedExtensions  = removeMarkedExtensions;
+    exports.updateExtensions        = updateExtensions;
+    exports.getAvailableUpdates     = getAvailableUpdates;
+    exports.cleanAvailableUpdates   = cleanAvailableUpdates;
     
-    exports.ENABLED = ENABLED;
-    exports.START_FAILED = START_FAILED;
+    exports.ENABLED       = ENABLED;
+    exports.START_FAILED  = START_FAILED;
     
-    exports.LOCATION_DEFAULT = LOCATION_DEFAULT;
-    exports.LOCATION_DEV = LOCATION_DEV;
-    exports.LOCATION_USER = LOCATION_USER;
-    exports.LOCATION_UNKNOWN = LOCATION_UNKNOWN;
+    exports.LOCATION_DEFAULT  = LOCATION_DEFAULT;
+    exports.LOCATION_DEV      = LOCATION_DEV;
+    exports.LOCATION_USER     = LOCATION_USER;
+    exports.LOCATION_UNKNOWN  = LOCATION_UNKNOWN;
 
     // For unit testing only
-    exports._reset = _reset;
-    exports._setExtensions = _setExtensions;
+    exports._reset          = _reset;
+    exports._setExtensions  = _setExtensions;
 });
