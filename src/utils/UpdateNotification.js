@@ -52,7 +52,7 @@ define(function (require, exports, module) {
     // Time of last registry check for update
     PreferencesManager.stateManager.definePreference("lastExtensionRegistryCheckTime", "number", 0);
     // Data about available updates in the registry
-    PreferencesManager.stateManager.definePreference("extensionUpdateInfo", "array", []);
+    PreferencesManager.stateManager.definePreference("extensionUpdateInfo", "Array", []);
 
     PreferencesManager.convertPreferences(module, {
         "lastNotifiedBuildNumber": "user",
