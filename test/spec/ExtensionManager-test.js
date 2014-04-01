@@ -1225,9 +1225,17 @@ define(function (require, exports, module) {
                         expect($button.length).toBe(1);
                         expect($button.prop("disabled")).toBeFalsy();
                         expect(model.notifyCount).toBe(1);
-                        expect(ExtensionManager.getAvailableUpdates().length).toBe(1);
+                        var availableUpdates = ExtensionManager.getAvailableUpdates();
+                        expect(availableUpdates.length).toBe(1);
                         
                         expect($("button.install[data-extension-id=mock-extension]", view.$el).length).toBe(0);
+
+                        // cleanAvailableUpdates shouldn't clean the array
+                        expect(ExtensionManager.cleanAvailableUpdates(availableUpdates).length).toBe(1);
+                        // now simulate that update is installed and see if cleanAvailableUpdates() method will work
+                        ExtensionManager.extensions["mock-extension"].installInfo.metadata.version =
+                            ExtensionManager.extensions["mock-extension"].registryInfo.metadata.version;
+                        expect(ExtensionManager.cleanAvailableUpdates(availableUpdates).length).toBe(0);
                     });
                 });
                 
