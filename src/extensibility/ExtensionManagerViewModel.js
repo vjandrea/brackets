@@ -413,6 +413,7 @@ define(function (require, exports, module) {
         this.sortedFullSet = this.sortedFullSet.sort(function (key1, key2) {
             var ua1 = self.extensions[key1].installInfo.updateAvailable,
                 ua2 = self.extensions[key2].installInfo.updateAvailable;
+
             if (ua1 && !ua2) {
                 return -1;
             } else if (!ua1 && ua2) {
