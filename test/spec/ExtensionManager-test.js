@@ -1241,7 +1241,9 @@ define(function (require, exports, module) {
                         var $button = $("button.update[data-extension-id=mock-extension]", view.$el);
                         expect($button.length).toBe(1);
                         expect($button.prop("disabled")).toBeTruthy();
-                        expect(model.notifyCount).toBe(1);
+
+                        // notify count doesn't show extensions that cannot be updated
+                        expect(model.notifyCount).toBe(0);
                         
                         expect($("button.install[data-extension-id=mock-extension]", view.$el).length).toBe(0);
                         expect($(".alert.warning", view.$el).length).toBe(0);
@@ -1259,7 +1261,9 @@ define(function (require, exports, module) {
                         var $button = $("button.update[data-extension-id=mock-extension]", view.$el);
                         expect($button.length).toBe(1);
                         expect($button.prop("disabled")).toBeTruthy();
-                        expect(model.notifyCount).toBe(1);
+
+                        // notify count doesn't show extensions that cannot be updated
+                        expect(model.notifyCount).toBe(0);
                         
                         expect($("button.install[data-extension-id=mock-extension]", view.$el).length).toBe(0);
                         expect($(".alert.warning", view.$el).length).toBe(0);
