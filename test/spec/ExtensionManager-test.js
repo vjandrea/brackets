@@ -1096,6 +1096,7 @@ define(function (require, exports, module) {
                         
                         // And no overall update icon overlay
                         expect(model.notifyCount).toBe(0);
+                        expect(ExtensionManager.getAvailableUpdates().length).toBe(0);
                     });
                 });
                 
@@ -1224,6 +1225,7 @@ define(function (require, exports, module) {
                         expect($button.length).toBe(1);
                         expect($button.prop("disabled")).toBeFalsy();
                         expect(model.notifyCount).toBe(1);
+                        expect(ExtensionManager.getAvailableUpdates().length).toBe(1);
                         
                         expect($("button.install[data-extension-id=mock-extension]", view.$el).length).toBe(0);
                     });
@@ -1244,6 +1246,7 @@ define(function (require, exports, module) {
 
                         // notify count doesn't show extensions that cannot be updated
                         expect(model.notifyCount).toBe(0);
+                        expect(ExtensionManager.getAvailableUpdates().length).toBe(0);
                         
                         expect($("button.install[data-extension-id=mock-extension]", view.$el).length).toBe(0);
                         expect($(".alert.warning", view.$el).length).toBe(0);
@@ -1264,6 +1267,7 @@ define(function (require, exports, module) {
 
                         // notify count doesn't show extensions that cannot be updated
                         expect(model.notifyCount).toBe(0);
+                        expect(ExtensionManager.getAvailableUpdates().length).toBe(0);
                         
                         expect($("button.install[data-extension-id=mock-extension]", view.$el).length).toBe(0);
                         expect($(".alert.warning", view.$el).length).toBe(0);
