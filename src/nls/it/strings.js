@@ -96,15 +96,15 @@ define({
     "LIVE_DEV_STATUS_TIP_SYNC_ERROR"    : "Anteprima Live (non aggiorna a causa di un errore di sintassi)",
 
     "LIVE_DEV_DETACHED_REPLACED_WITH_DEVTOOLS" : "L’Anteprima Live è stata cancellata perché uno strumento di sviluppo è stato aperto nel browser",
-    "LIVE_DEV_DETACHED_TARGET_CLOSED"          : "L’Anteprima Live è stata cancellata perché è stato chiuso il browser",
-    "LIVE_DEV_NAVIGATED_AWAY"                  : "L’Anteprima Live è stata cancellata perché il browser ha caricato una pagina che non fa parte del progetto corrente",
-    "LIVE_DEV_CLOSED_UNKNOWN_REASON"           : "L’Anteprima Live è stata cancellata a causa di un errore sconosciuto ({0})",
+    "LIVE_DEV_DETACHED_TARGET_CLOSED"   : "L’Anteprima Live è stata cancellata perché è stato chiuso il browser",
+    "LIVE_DEV_NAVIGATED_AWAY"           : "L’Anteprima Live è stata cancellata perché il browser ha caricato una pagina che non fa parte del progetto corrente",
+    "LIVE_DEV_CLOSED_UNKNOWN_REASON"    : "L’Anteprima Live è stata cancellata a causa di un errore sconosciuto ({0})",
     
     "SAVE_CLOSE_TITLE"                  : "Salva le modifiche",
     "SAVE_CLOSE_MESSAGE"                : "Vuoi cambiare le modifiche apportate al file <span class='dialog-filename'>{0}</span>?",
     "SAVE_CLOSE_MULTI_MESSAGE"          : "Vuoi cambiare le modifiche apportate ai seguenti file?",
     "EXT_MODIFIED_TITLE"                : "Modifiche esterne",
-    "CONFIRM_FOLDER_DELETE_TITLE"       : "Confirm Delete",
+    "CONFIRM_FOLDER_DELETE_TITLE"       : "Conferma eliminazione",
     "CONFIRM_FOLDER_DELETE"             : "Sei sicuro di eliminare la cartella <span class='dialog-filename'>{0}</span>?",
     "FILE_DELETED_TITLE"                : "File Eliminato",
     "EXT_MODIFIED_WARNING"              : "<span class='dialog-filename'>{0}</span> è stato modificato sul disco.<br /><br />Vuoi salvare il file e sovrascrivere le modifiche?",
@@ -205,7 +205,7 @@ define({
     "NO_ERRORS_MULTIPLE_PROVIDER"           : "Nessun problema trovato - ottimo lavoro!",
     "LINT_DISABLED"                         : "Linting disabilitato",
     "NO_LINT_AVAILABLE"                     : "Linter disponibile {0}",
-    "NOTHING_TO_LINT"                       : "Nothing to lint",
+    "NOTHING_TO_LINT"                       : "Nulla da controllare",
     
     
     /**
@@ -309,8 +309,8 @@ define({
     "HELP_MENU"                         : "Aiuto",
     "CMD_CHECK_FOR_UPDATE"              : "Controlla aggiornamenti",
     "CMD_HOW_TO_USE_BRACKETS"           : "Come usare {APP_NAME}",
-    "CMD_FORUM"                         : "Forum di{APP_NAME}",
-    "CMD_RELEASE_NOTES"                 : "Note del lancio",
+    "CMD_FORUM"                         : "Forum di {APP_NAME}",
+    "CMD_RELEASE_NOTES"                 : "Note di versione",
     "CMD_REPORT_AN_ISSUE"               : "Segnala un problema",
     "CMD_SHOW_EXTENSIONS_FOLDER"        : "Mostra cartella estensioni",
     "CMD_TWITTER"                       : "{TWITTER_NAME} su Twitter",
@@ -329,9 +329,9 @@ define({
     "ABOUT_TEXT_LINE1"                  : "sprint {VERSION_MINOR} {BUILD_TYPE} {VERSION}",
     "ABOUT_TEXT_LINE3"                  : "Avvisi, termini e condizioni circa i software di terze parti raggiungibili all’indirizzo <a href='{ADOBE_THIRD_PARTY}'>{ADOBE_THIRD_PARTY}</a> incorporati come riferimento.",
     "ABOUT_TEXT_LINE4"                  : "Documentazione e codice sorgente sono disponibili all’indirizzo <a href='https://github.com/adobe/brackets/'>https://github.com/adobe/brackets/</a>",
-    "ABOUT_TEXT_LINE5"                     : "Fatto con \u2764 e JavaScript da:",
-    "ABOUT_TEXT_LINE6"                     : "Molta gente (abbiamo qualche difficoltà a caricare questi dati ora).",
-    "ABOUT_TEXT_WEB_PLATFORM_DOCS"         : "I loghi di 'Web Platform Docs'e 'Web Platform' sono sotto licenza Creative Common Attribution, <a href='{WEB_PLATFORM_DOCS_LICENSE}'>CC-BY 3.0 Unported</a>.",
+    "ABOUT_TEXT_LINE5"                  : "Fatto con \u2764 e JavaScript da:",
+    "ABOUT_TEXT_LINE6"                  : "Molta gente (abbiamo qualche difficoltà a caricare questi dati ora).",
+    "ABOUT_TEXT_WEB_PLATFORM_DOCS"      : "I loghi di 'Web Platform Docs'e 'Web Platform' sono sotto licenza Creative Common Attribution, <a href='{WEB_PLATFORM_DOCS_LICENSE}'>CC-BY 3.0 Unported</a>.",
     "UPDATE_NOTIFICATION_TOOLTIP"       : "È disponibile una nuova versione di {APP_NAME}! Clicca qui per i dettagli.",
     "UPDATE_AVAILABLE_TITLE"            : "Aggiornamento disponibile",
     "UPDATE_MESSAGE"                    : "Hey, è disponibile una nuova versione di {APP_NAME}. Nuove caratteristiche:",
@@ -482,7 +482,7 @@ define({
     "JSLINT_NAME"                               : "JSLint",
     
     // extensions/default/QuickView
-    "CMD_ENABLE_QUICK_VIEW"                     : "Vista Veloce al passaggio del mouse",
+    "CMD_ENABLE_QUICK_VIEW"                     : "Anteprima veloce al passaggio del mouse",
     
     // extensions/default/RecentProjects
     "CMD_TOGGLE_RECENT_PROJECTS"                : "Progetti recenti",
@@ -490,3 +490,5 @@ define({
     // extensions/default/WebPlatformDocs
     "DOCS_MORE_LINK"                            : "Leggi tutto"
 });
+
+/* Last translated for 8743b57e273aa8b32628b93c9f2c1f70e8c6ac7a */
